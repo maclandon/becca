@@ -200,24 +200,21 @@
   }
 
   .hero-right {
-    background: var(--cream);
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 60px;
+    padding: 0;
   }
 
-  /* decorative eye illustration */
-  .eye-graphic {
+  .hero-photo {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
-    width: 340px;
-    height: 340px;
-    opacity: 0.12;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .hero-card {
@@ -227,6 +224,7 @@
     border: 1px solid var(--border);
     position: relative;
     z-index: 2;
+    margin: 0 40px 40px;
     animation: float 4s ease-in-out infinite;
   }
 
@@ -296,26 +294,89 @@
 
   .card-btn:hover { background: var(--gold-light); }
 
-  /* floating badge */
-  .badge-float {
-    position: absolute;
-    top: 48px;
-    right: -12px;
-    background: var(--forest);
-    color: var(--cream);
-    border-radius: 12px;
-    padding: 14px 18px;
-    z-index: 3;
-    font-size: 12px;
-    line-height: 1.5;
+  /* ── ABOUT ── */
+  .about-section {
+    padding: 120px 80px;
+    background: var(--warm-white);
   }
 
-  .badge-float strong {
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-photo-frame {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+  }
+
+  .about-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+  }
+
+  .about-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 20px;
+  }
+
+  .about-eyebrow::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--mint);
+  }
+
+  .about-heading {
     font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    margin-bottom: 2px;
-    color: var(--gold);
+    font-size: clamp(32px, 3.5vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    margin-bottom: 24px;
+  }
+
+  .about-bio {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+
+  .about-credentials {
+    display: flex;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .credential {
+    font-size: 13px;
+    color: var(--forest);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .credential::before {
+    content: '→';
+    color: var(--mint);
+    font-size: 13px;
   }
 
   /* ── HOW IT WORKS ── */
@@ -937,19 +998,7 @@
   </div>
 
   <div class="hero-right">
-    <!-- Decorative circle -->
-    <svg class="eye-graphic" viewBox="0 0 340 340" fill="none">
-      <circle cx="170" cy="170" r="160" stroke="#1A3028" stroke-width="1"/>
-      <circle cx="170" cy="170" r="120" stroke="#1A3028" stroke-width="0.5"/>
-      <circle cx="170" cy="170" r="60" stroke="#1A3028" stroke-width="1"/>
-      <ellipse cx="170" cy="170" rx="160" ry="60" stroke="#1A3028" stroke-width="0.5"/>
-      <line x1="10" y1="170" x2="330" y2="170" stroke="#1A3028" stroke-width="0.5"/>
-    </svg>
-
-    <div class="badge-float">
-      <strong>2–3 hrs</strong>
-      per week from home
-    </div>
+    <img src="becca-hero.jpg" alt="Dr. Becca — Optometrist" class="hero-photo">
 
     <div class="hero-card">
       <div class="card-tag">Pediatric Vision · Next available today</div>
@@ -986,6 +1035,25 @@
       <div class="step-num">03</div>
       <div class="step-title">Leave with a plan</div>
       <p class="step-desc">Receive a written care summary within 24 hours — exercises, referrals, questions to ask your local provider, or the reassurance that everything is fine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about-doctor">
+  <div class="about-grid">
+    <div class="about-photo-frame">
+      <img src="becca-about.jpeg" alt="Dr. Becca">
+    </div>
+    <div class="about-text">
+      <div class="about-eyebrow">Your doctor</div>
+      <h2 class="about-heading">Mother of two. Optometrist for twelve years.</h2>
+      <p class="about-bio">After more than a decade in clinical practice, I started ClearSight because I saw the same thing over and over — parents unsure if their child's struggles were a vision problem, athletes training everything except their eyes, and professionals ignoring screen fatigue until it became debilitating. I believe expert guidance shouldn't require a three-month waitlist or a surprise bill.</p>
+      <div class="about-credentials">
+        <div class="credential">Board-Certified Optometrist</div>
+        <div class="credential">OD</div>
+        <div class="credential">Licensed in California</div>
+      </div>
     </div>
   </div>
 </section>
