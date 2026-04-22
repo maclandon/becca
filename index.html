@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
 <title>Dr. Rebecca Armagno, OD — Expert Eye Care, On Your Terms</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -32,6 +33,23 @@
     color: var(--text);
     overflow-x: hidden;
   }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
 
   /* ── NAV ── */
   nav {
@@ -159,12 +177,37 @@
     margin-top: 8px;
   }
 
+  /* ── EMERGENCY BANNER ── */
+  .emergency-banner {
+    background: rgba(196,113,74,0.07);
+    border-bottom: 1px solid var(--border-warm);
+    padding: 10px 52px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .emergency-banner svg {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    color: var(--terra);
+  }
+
+  .emergency-banner p {
+    font-size: 12px;
+    color: var(--stone);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .emergency-banner strong { font-weight: 500; color: var(--terra); }
+
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 55% 45%;
-    padding-top: 69px;
+    padding-top: 109px; /* 69px nav + ~40px emergency banner */
   }
 
   .hero-left {
@@ -304,7 +347,7 @@
     inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 15%;
   }
 
   .hero-right::after {
@@ -630,6 +673,7 @@
     max-width: 500px;
   }
 
+  /* ── LICENSE ROW — now with NPI + license numbers ── */
   .license-row {
     display: flex;
     align-items: flex-start;
@@ -638,24 +682,57 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 14px 18px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   .license-row svg {
     width: 15px; height: 15px;
     color: var(--sage);
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   .license-row-text {
     font-size: 13px;
     color: var(--moss);
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .license-row-text strong { font-weight: 500; }
+
+  .license-numbers {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .license-num-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 11.5px;
+    color: var(--stone);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .license-num-pill strong {
+    font-weight: 500;
+    color: var(--moss);
+  }
+
+  .license-num-pill span {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--sage);
+    letter-spacing: 0.06em;
+  }
 
   .about-credentials {
     display: flex;
@@ -678,9 +755,10 @@
 
   .credential::before { content: '→'; color: var(--terra); }
 
+  /* ── TRUST BAR — Tufts elevated ── */
   .about-trust-bar {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.25fr 1fr 1fr;
     gap: 2px;
     background: var(--border);
     border-radius: 16px;
@@ -693,9 +771,19 @@
     padding: 22px 18px;
     text-align: center;
     transition: background 0.2s;
+    position: relative;
   }
 
   .about-trust-item:hover { background: var(--linen-deep); }
+
+  /* Tufts gets a featured treatment */
+  .about-trust-item.featured-cred {
+    background: var(--moss);
+  }
+
+  .about-trust-item.featured-cred:hover { background: var(--moss-light); }
+
+  .about-trust-item.featured-cred .about-trust-label { color: rgba(242,235,224,0.75); }
 
   .about-trust-icon { font-size: 19px; margin-bottom: 10px; }
 
@@ -804,7 +892,6 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 26px;
-    font-size: 22px;
   }
 
   .niche-title {
@@ -842,6 +929,9 @@
     background: var(--warm-white);
   }
 
+  /* Updated heading copy */
+  .features-section .section-title { max-width: 480px; }
+
   .features-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -870,7 +960,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
     flex-shrink: 0;
   }
 
@@ -922,6 +1011,17 @@
 
   .testimonial-item:hover::before { opacity: 1; }
 
+  .testimonial-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+
+  .testimonial-stars span {
+    color: var(--terra);
+    font-size: 13px;
+  }
+
   .testimonial-quote-mark {
     font-family: 'Cormorant Garamond', serif;
     font-size: 52px;
@@ -959,7 +1059,6 @@
   }
 
   .attr-name { font-size: 13px; font-weight: 500; color: var(--moss); }
-
   .attr-role { font-size: 11.5px; color: var(--stone); margin-top: 2px; font-weight: 300; }
 
   .visual-pill {
@@ -979,14 +1078,40 @@
   .visual-pill::before { content: '✓'; color: var(--terra-light); }
 
   /* ── PRICING ── */
+  /* Dark section before pricing to break linen-on-linen rhythm */
   .pricing-section {
     padding: 120px 80px;
-    background: var(--linen);
+    background: var(--moss);
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
-  .pricing-section .section-label { justify-content: center; }
-  .pricing-section .section-title { margin: 0 auto 64px; text-align: center; }
+  .pricing-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(92,138,110,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .pricing-section .section-label {
+    justify-content: center;
+    color: var(--terra-light);
+  }
+
+  .pricing-section .section-label::before { background: var(--terra-light); }
+
+  .pricing-section .section-title {
+    margin: 0 auto 64px;
+    text-align: center;
+    color: var(--linen);
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-section .section-title em { color: var(--terra-light); }
 
   .pricing-grid {
     display: grid;
@@ -994,24 +1119,35 @@
     gap: 20px;
     max-width: 1040px;
     margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
   }
 
   .price-card {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 22px;
     padding: 40px 34px;
     text-align: left;
-    transition: transform 0.25s, box-shadow 0.25s;
+    transition: transform 0.25s, background 0.25s, border-color 0.25s;
     position: relative;
   }
 
   .price-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 24px 64px rgba(30,58,47,0.09);
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
   }
 
-  .price-card.featured { background: var(--moss); border-color: var(--moss); }
+  .price-card.featured {
+    background: var(--linen);
+    border-color: var(--linen);
+  }
+
+  .price-card.featured:hover {
+    background: var(--warm-white);
+    border-color: var(--warm-white);
+  }
 
   .featured-badge {
     position: absolute;
@@ -1033,38 +1169,38 @@
     font-weight: 400;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--stone);
+    color: rgba(242,235,224,0.45);
     margin-bottom: 20px;
   }
 
-  .price-card.featured .price-type { color: rgba(242,235,224,0.45); }
+  .price-card.featured .price-type { color: var(--stone); }
 
   .price-amount {
     font-family: 'Cormorant Garamond', serif;
     font-size: 52px;
     font-weight: 300;
     letter-spacing: -0.02em;
-    color: var(--moss);
+    color: var(--linen);
     line-height: 1;
     margin-bottom: 4px;
   }
 
-  .price-card.featured .price-amount { color: var(--linen); }
+  .price-card.featured .price-amount { color: var(--moss); }
 
   .price-per {
     font-size: 12.5px;
-    color: var(--stone);
+    color: rgba(242,235,224,0.45);
     margin-bottom: 28px;
     font-weight: 300;
   }
 
-  .price-card.featured .price-per { color: rgba(242,235,224,0.45); }
+  .price-card.featured .price-per { color: var(--stone); }
 
   .price-note {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    background: rgba(196,113,74,0.1);
+    background: rgba(196,113,74,0.12);
     border-radius: 10px;
     padding: 10px 13px;
     margin-bottom: 16px;
@@ -1074,10 +1210,20 @@
     font-weight: 300;
   }
 
+  .price-card.featured .price-note {
+    background: rgba(196,113,74,0.1);
+    color: var(--terra);
+  }
+
   .price-note svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 2px; }
 
-  .price-divider { height: 1px; background: var(--border); margin-bottom: 28px; }
-  .price-card.featured .price-divider { background: rgba(255,255,255,0.1); }
+  .price-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 28px;
+  }
+
+  .price-card.featured .price-divider { background: var(--border); }
 
   .price-features {
     list-style: none;
@@ -1089,7 +1235,7 @@
 
   .price-features li {
     font-size: 13.5px;
-    color: var(--stone);
+    color: rgba(242,235,224,0.65);
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -1097,17 +1243,17 @@
     line-height: 1.5;
   }
 
-  .price-card.featured .price-features li { color: rgba(242,235,224,0.65); }
+  .price-card.featured .price-features li { color: var(--stone); }
 
   .price-features li::before {
     content: '→';
-    color: var(--sage);
+    color: var(--terra-light);
     font-size: 13px;
     flex-shrink: 0;
     margin-top: 1px;
   }
 
-  .price-card.featured .price-features li::before { color: var(--terra-light); }
+  .price-card.featured .price-features li::before { color: var(--sage); }
 
   .price-cta {
     display: block;
@@ -1119,12 +1265,15 @@
     text-decoration: none;
     letter-spacing: 0.03em;
     transition: all 0.2s;
-    border: 1px solid var(--moss);
-    color: var(--moss);
+    border: 1px solid rgba(242,235,224,0.3);
+    color: var(--linen);
     background: transparent;
   }
 
-  .price-cta:hover { background: var(--moss); color: var(--linen); }
+  .price-cta:hover {
+    background: rgba(242,235,224,0.1);
+    border-color: rgba(242,235,224,0.5);
+  }
 
   .price-card.featured .price-cta {
     background: var(--terra);
@@ -1142,16 +1291,97 @@
     max-width: 600px;
     margin: 0 auto;
     font-size: 12.5px;
-    color: var(--stone);
+    color: rgba(242,235,224,0.4);
     font-weight: 300;
     line-height: 1.7;
-    padding: 20px 28px;
-    background: var(--warm-white);
-    border-radius: 12px;
-    border: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
 
-  .pricing-disclaimer strong { font-weight: 500; color: var(--moss); }
+  .pricing-disclaimer strong { font-weight: 500; color: rgba(242,235,224,0.6); }
+
+  /* ── FAQ ── */
+  .faq-section {
+    padding: 120px 80px;
+    background: var(--linen);
+  }
+
+  .faq-section .section-title { margin-bottom: 48px; }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .faq-item {
+    background: var(--warm-white);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .faq-item:hover { background: var(--linen-deep); }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 28px 32px;
+  }
+
+  .faq-q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--moss);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .faq-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.3s;
+    font-size: 16px;
+    color: var(--terra);
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--terra);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 32px;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding: 0 32px 28px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--stone);
+    line-height: 1.75;
+    font-weight: 300;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
 
   /* ── CTA ── */
   .cta-section { padding: 80px; background: var(--warm-white); }
@@ -1238,14 +1468,28 @@
   /* ── FOOTER ── */
   footer { background: var(--moss); padding: 52px 80px; }
 
-  .footer-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
-    padding-bottom: 32px;
+  /* Full-width legal disclaimer at top of footer */
+  .footer-legal-bar {
+    padding-bottom: 28px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     margin-bottom: 28px;
+  }
+
+  .footer-legal-bar p {
+    font-size: 12px;
+    color: rgba(242,235,224,0.28);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 780px;
+  }
+
+  .footer-legal-bar strong { color: rgba(242,235,224,0.45); font-weight: 400; }
+
+  .footer-bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
     flex-wrap: wrap;
   }
 
@@ -1281,24 +1525,6 @@
 
   .footer-links a:hover { color: var(--linen); }
 
-  .footer-bottom {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .footer-disclaimer {
-    font-size: 11.5px;
-    color: rgba(242,235,224,0.25);
-    font-weight: 300;
-    line-height: 1.75;
-    max-width: 600px;
-  }
-
-  .footer-disclaimer strong { color: rgba(242,235,224,0.4); font-weight: 400; }
-
   .footer-copy {
     font-size: 11.5px;
     color: rgba(242,235,224,0.25);
@@ -1306,7 +1532,91 @@
     white-space: nowrap;
   }
 
-  /* ── ANIMATIONS ── */
+  /* ── TIMELINE ── */
+  .timeline { margin-bottom: 0; }
+
+  .timeline-label {
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .timeline-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--terra);
+    flex-shrink: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 16px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 9px; top: 18px; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--linen-deep);
+    border: 2px solid var(--border);
+    margin-top: 4px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-dot.featured-dot {
+    background: var(--terra);
+    border-color: var(--terra);
+    width: 12px; height: 12px;
+    margin-top: 3px;
+    box-shadow: 0 0 0 3px rgba(196,113,74,0.15);
+  }
+
+  .timeline-content { padding-top: 2px; }
+
+  .timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--moss);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .timeline-org {
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 400;
+    margin-bottom: 2px;
+    line-height: 1.4;
+  }
+
+  .timeline-date {
+    font-size: 11.5px;
+    color: var(--terra);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── HERO ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1327,31 +1637,45 @@
   /* ── MOBILE ── */
   @media (max-width: 1024px) {
     nav { padding: 18px 32px; }
+    .emergency-banner { padding: 10px 32px; }
+
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 52px 36px 44px; order: 2; }
-    .hero-right { order: 1; height: 85vw; min-height: 480px; }
+    .hero-right { order: 1; height: 75vw; min-height: 400px; max-height: 560px; }
     .hero-card { display: none; }
     .hero-trust { gap: 28px; }
+
     .disclaimer-banner { padding: 14px 36px; }
+
     .section { padding: 80px 36px; }
     .about-section { padding: 80px 36px; }
     .niches-section { padding: 80px 36px; }
     .features-section { padding: 80px 36px; }
     .pricing-section { padding: 80px 36px; }
+    .faq-section { padding: 80px 36px; }
     .cta-section { padding: 40px 36px; }
+
     .steps { grid-template-columns: 1fr; }
+
     .about-grid { grid-template-columns: 1fr; gap: 44px; }
     .about-photo-wrap { position: static; }
-    .about-photo-frame { aspect-ratio: 3/4; }
+    .about-photo-frame { aspect-ratio: 3 / 4; max-height: 520px; }
+    .about-trust-bar { grid-template-columns: 1fr; }
+
     .niches-grid { grid-template-columns: 1fr; gap: 14px; }
+
     .features-grid { grid-template-columns: 1fr; gap: 52px; }
     .features-visual { position: static; }
+
     .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
+
+    .faq-grid { grid-template-columns: 1fr; }
+
     .cta-inner { flex-direction: column; padding: 52px 44px; text-align: center; }
     .cta-title { font-size: 36px; }
+
     footer { padding: 44px 36px; }
-    .footer-top { flex-direction: column; gap: 20px; }
-    .footer-bottom { flex-direction: column; gap: 16px; }
+    .footer-bottom-row { flex-direction: column; align-items: flex-start; gap: 20px; }
     .footer-copy { white-space: normal; }
   }
 
@@ -1359,22 +1683,32 @@
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
+
+    .emergency-banner { padding: 10px 24px; }
+    .emergency-banner p { font-size: 11px; }
+
     .hero-left { padding: 40px 24px; }
-    .hero-card { display: none; }
     .hero-trust { gap: 18px; }
+
     .disclaimer-banner { padding: 12px 24px; }
     .section { padding: 64px 24px; }
     .about-section { padding: 64px 24px; }
     .niches-section { padding: 64px 24px; }
     .features-section { padding: 64px 24px; }
     .pricing-section { padding: 64px 24px; }
+    .faq-section { padding: 64px 24px; }
     .cta-section { padding: 28px 20px; }
     .cta-inner { padding: 44px 28px; border-radius: 20px; }
     .cta-title { font-size: 30px; }
-    .about-trust-bar { grid-template-columns: 1fr; }
+
     .about-credentials { flex-direction: column; gap: 10px; }
+    .license-numbers { flex-direction: column; }
+
     footer { padding: 36px 24px; }
     .section-title { margin-bottom: 40px; }
+
+    .faq-question { padding: 20px 24px; }
+    .faq-item.open .faq-answer { padding: 0 24px 20px; }
   }
 
   @media (max-width: 480px) {
@@ -1387,6 +1721,12 @@
 </head>
 <body>
 
+<!-- EMERGENCY CALLOUT — top of page, above nav -->
+<div class="emergency-banner">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1L1 14h14L8 1z"/><path d="M8 6v4M8 11.5h.01" stroke-linecap="round"/></svg>
+  <p><strong>Eye emergency?</strong> Sudden vision loss, eye pain, or flashes of light are urgent — please go to an emergency room or urgent care immediately. Do not book here.</p>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="logo-wrap">
@@ -1397,6 +1737,7 @@
     <li><a href="#how">How it works</a></li>
     <li><a href="#specialties">Specialties</a></li>
     <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#book" class="nav-cta">Book a consult</a></li>
   </ul>
   <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
@@ -1408,6 +1749,7 @@
   <a href="#how" onclick="toggleMenu()">How it works</a>
   <a href="#specialties" onclick="toggleMenu()">Specialties</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#book" onclick="toggleMenu()" class="mobile-cta">Book a consult →</a>
 </div>
 
@@ -1434,14 +1776,14 @@
     <div class="hero-actions">
       <a href="#book" class="btn-primary">Book your consultation →</a>
       <a href="#how" class="btn-ghost">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--terra);animation:dotpulse 2s ease-in-out infinite;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--terra);animation:dotpulse 2s ease-in-out infinite;flex-shrink:0;"></div>
         See how it works
       </a>
     </div>
 
     <div class="hero-trust">
       <div class="trust-item">
-        <div class="trust-num">12+</div>
+        <div class="trust-num">5+</div>
         <div class="trust-label">Years clinical</div>
       </div>
       <div class="trust-item">
@@ -1456,7 +1798,7 @@
   </div>
 
   <div class="hero-right">
-    <img src="becca-hero.jpg" alt="Dr. Rebecca Armagno, OD" class="hero-photo">
+    <img src="beccahero.jpg" alt="Dr. Rebecca Armagno, OD" class="hero-photo">
     <div class="hero-card">
       <div class="card-tag">Pediatric Vision · Next available today</div>
       <div class="card-title">Vision Development Consult</div>
@@ -1480,20 +1822,20 @@
 
 <!-- HOW IT WORKS -->
 <section class="section" id="how">
-  <div class="section-label">Simple process</div>
-  <h2 class="section-title">Three steps to <em>real answers</em></h2>
+  <div class="section-label reveal">Simple process</div>
+  <h2 class="section-title reveal reveal-delay-1">Three steps to <em>real answers</em></h2>
   <div class="steps">
-    <div class="step">
+    <div class="step reveal reveal-delay-1">
       <div class="step-num">01</div>
       <div class="step-title">Upload & prepare</div>
       <p class="step-desc">Share your previous prescriptions, photos, or symptoms through our secure portal before the call. Dr. Armagno reviews everything in advance so your 30 minutes are used wisely.</p>
     </div>
-    <div class="step">
+    <div class="step reveal reveal-delay-2">
       <div class="step-num">02</div>
       <div class="step-title">Meet your doctor</div>
       <p class="step-desc">A focused video consultation — just you and Dr. Armagno. No rushed appointments, no waiting room. Clear, expert guidance tailored entirely to your situation.</p>
     </div>
-    <div class="step">
+    <div class="step reveal reveal-delay-3">
       <div class="step-num">03</div>
       <div class="step-title">Leave with a plan</div>
       <p class="step-desc">Receive a written care summary within 24 hours — exercises, referrals, questions to ask your local provider, or the reassurance that everything is fine.</p>
@@ -1504,9 +1846,9 @@
 <!-- ABOUT -->
 <section class="about-section" id="about-doctor">
   <div class="about-grid">
-    <div class="about-photo-wrap">
+    <div class="about-photo-wrap reveal">
       <div class="about-photo-frame">
-        <img src="becca-about.jpeg" alt="Dr. Rebecca Armagno, OD">
+        <img src="beccaabout.jpeg" alt="Dr. Rebecca Armagno, OD">
       </div>
       <div class="about-photo-accent">
         <div class="about-photo-accent-dot"></div>
@@ -1517,39 +1859,87 @@
     </div>
 
     <div class="about-text">
-      <div class="about-eyebrow">Your doctor</div>
-      <h2 class="about-heading">Mother of two.<br>Optometrist for twelve years.</h2>
-      <p class="about-bio">After more than a decade in clinical practice, I started this practice because I saw the same thing over and over — parents unsure if their child's struggles were a vision problem, athletes training everything except their eyes, and professionals ignoring screen fatigue until it became debilitating. I believe expert guidance shouldn't require a three-month waitlist or a surprise bill.</p>
+      <div class="about-eyebrow reveal">Your doctor</div>
+      <h2 class="about-heading reveal reveal-delay-1">Mother of two.<br>Optometrist since 2020.</h2>
+      <p class="about-bio reveal reveal-delay-2">After training at one of the country's top pediatric programs and years in clinical practice across New York and Pennsylvania, I started this practice because I kept seeing the same thing — parents unsure if their child's struggles were a vision problem, athletes training everything except their eyes, and professionals ignoring screen fatigue until it became debilitating. Expert guidance shouldn't require a three-month waitlist or a surprise bill.</p>
 
-      <div class="license-row">
+      <!-- License row with real license number -->
+      <div class="license-row reveal reveal-delay-2">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.5 3.5L8 9l-3 1.5.5-3.5L3 4.5l3.5-.5L8 1z" stroke-linejoin="round"/></svg>
         <div class="license-row-text">
-          <strong>Board-Certified Optometrist, OD</strong> · Licensed in New York &amp; Pennsylvania · Telehealth available to NY and PA residents
+          <strong>Board-Certified Optometrist, OD</strong> · Licensed in New York &amp; Pennsylvania · NPI <span style="font-family:monospace;font-size:12px;color:var(--sage);">1104440536</span>
         </div>
       </div>
 
-      <div class="about-credentials">
+      <!-- License number pills -->
+      <div class="license-numbers reveal reveal-delay-3">
+        <div class="license-num-pill">
+          <strong>NY License</strong>
+          <span>TUV009751-01</span>
+        </div>
+        <div class="license-num-pill">
+          <strong>PA NPI</strong>
+          <span>1366404345</span>
+        </div>
+      </div>
+
+      <div class="about-credentials reveal reveal-delay-3">
         <div class="credential">Board-Certified OD</div>
         <div class="credential">Licensed: NY &amp; PA</div>
-        <div class="credential">12 Years Clinical</div>
+        <div class="credential">Salus University, OD 2020</div>
       </div>
 
-      <div class="about-trust-bar">
-        <div class="about-trust-item">
-          <div class="about-trust-icon">🏥</div>
-          <div class="about-trust-label">Tufts Children's Hospital<br>Pediatric Residency</div>
+      <!-- Education & Work History Timeline — reverse chronological -->
+      <div class="timeline reveal reveal-delay-4">
+        <div class="timeline-label">Education &amp; Experience</div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Optometrist</div>
+            <div class="timeline-org">Long Island Vision &amp; Contact Lens Services · New York</div>
+            <div class="timeline-date">Jun 2023 – Jul 2024</div>
+          </div>
         </div>
-        <div class="about-trust-item">
-          <div class="about-trust-icon">🎓</div>
-          <div class="about-trust-label">New England College<br>of Optometry, OD</div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Optometrist</div>
+            <div class="timeline-org">Wyomissing Optometric Center · Pennsylvania</div>
+            <div class="timeline-date">Aug 2021 – Jan 2023</div>
+          </div>
         </div>
-        <div class="about-trust-item">
-          <div class="about-trust-icon">🎤</div>
-          <div class="about-trust-label">American Academy of<br>Optometry Conference Presenter</div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot featured-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Pediatric Optometry Resident</div>
+            <div class="timeline-org">New England College of Optometry · Tufts Children's Hospital</div>
+            <div class="timeline-date">May 2020 – Aug 2021</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Doctor of Optometry</div>
+            <div class="timeline-org">Salus University</div>
+            <div class="timeline-date">2017 – 2020</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Bachelor's Degree</div>
+            <div class="timeline-org">Binghamton University</div>
+            <div class="timeline-date">2012 – 2016</div>
+          </div>
         </div>
       </div>
 
-      <div class="research-card">
+      <div class="research-card reveal reveal-delay-4" style="margin-top:24px;">
         <div class="research-tag">Conference Presentation</div>
         <div class="research-title">Cycloplegic Cover Test Measurements in the Pediatric Population</div>
         <div class="research-venue">Presented at the American Academy of Optometry Annual Conference, Boston MA</div>
@@ -1560,11 +1950,14 @@
 
 <!-- SPECIALTIES -->
 <section class="niches-section" id="specialties">
-  <div class="section-label">Three specialties</div>
-  <h2 class="section-title">Not a general eye exam —<br>a <em>specialist consultation</em></h2>
+  <div class="section-label reveal">Three specialties</div>
+  <h2 class="section-title reveal reveal-delay-1">Not a general eye exam —<br>a <em>specialist consultation</em></h2>
   <div class="niches-grid">
-    <div class="niche-card">
-      <div class="niche-icon">👁</div>
+    <div class="niche-card reveal reveal-delay-1">
+      <div class="niche-icon">
+        <!-- Eye / pediatric vision -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--terra-light)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
       <div class="niche-title">Pediatric Vision</div>
       <p class="niche-desc">Your child's teacher says they're struggling. You're not sure if it's a vision problem, a reading issue, or both. Get a professional second opinion before spending thousands at a clinic.</p>
       <div class="niche-tags">
@@ -1574,8 +1967,11 @@
         <span class="niche-tag">Headaches</span>
       </div>
     </div>
-    <div class="niche-card">
-      <div class="niche-icon">⚡</div>
+    <div class="niche-card reveal reveal-delay-2">
+      <div class="niche-icon">
+        <!-- Target / sports precision -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--terra-light)"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
       <div class="niche-title">Sports Vision</div>
       <p class="niche-desc">Milliseconds matter. Visual processing speed, tracking, and hand-eye coordination are trainable. Get a customized drill plan and know exactly what's holding your performance back.</p>
       <div class="niche-tags">
@@ -1585,8 +1981,11 @@
         <span class="niche-tag">Athletes</span>
       </div>
     </div>
-    <div class="niche-card">
-      <div class="niche-icon">💻</div>
+    <div class="niche-card reveal reveal-delay-3">
+      <div class="niche-icon">
+        <!-- Monitor / digital strain -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--terra-light)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
       <div class="niche-title">Digital Eye Strain</div>
       <p class="niche-desc">Eight hours of screens a day wasn't what our eyes evolved for. Whether you're managing your own fatigue or rolling out a wellness program for your team, get a plan that actually works.</p>
       <div class="niche-tags">
@@ -1601,43 +2000,54 @@
 
 <!-- FEATURES -->
 <section class="features-section" id="about">
-  <div class="section-label">Why Dr. Armagno</div>
-  <h2 class="section-title">Built differently,<br><em>for good reason</em></h2>
+  <div class="section-label reveal">What you actually get</div>
+  <h2 class="section-title reveal reveal-delay-1">How I work,<br><em>and why it matters</em></h2>
   <div class="features-grid">
     <div class="feature-list">
-      <div class="feature-item">
-        <div class="feature-icon">🔒</div>
+      <div class="feature-item reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sage)"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
         <div>
           <div class="feature-title">Secure intake portal</div>
-          <p class="feature-desc">Upload prescriptions and photos before your call. Dr. Armagno reviews everything personally — so every minute is focused on your questions, not paperwork.</p>
+          <p class="feature-desc">Upload prescriptions and photos before your call. I review everything personally before we meet — so every minute is focused on your questions, not paperwork.</p>
         </div>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">📋</div>
+      <div class="feature-item reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sage)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
         <div>
           <div class="feature-title">Written care plan, every time</div>
           <p class="feature-desc">Every consultation ends with a documented follow-up: exercises, referral notes, and specific questions to bring to your local provider. Not just verbal advice — something you can act on.</p>
         </div>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">🔗</div>
+      <div class="feature-item reveal reveal-delay-3">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sage)"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
         <div>
           <div class="feature-title">Referral coordination</div>
-          <p class="feature-desc">If you need in-person care, Dr. Armagno tells you exactly what specialist to see, what tests to request, and what questions to ask — so you don't start from zero.</p>
+          <p class="feature-desc">If you need in-person care, I tell you exactly what specialist to see, what tests to request, and what questions to ask — so you don't start from zero.</p>
         </div>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">🎯</div>
+      <div class="feature-item reveal reveal-delay-4">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sage)"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
         <div>
-          <div class="feature-title">Not a replacement — a guide</div>
-          <p class="feature-desc">Think of it as having an eye doctor friend who gives you the real story. Dr. Armagno helps you understand what you're dealing with, what's urgent, and what to do next.</p>
+          <div class="feature-title">A guide, not a replacement</div>
+          <p class="feature-desc">Think of it as having an eye doctor friend who gives you the real story. I help you understand what you're dealing with, what's urgent, and what to do next.</p>
         </div>
       </div>
     </div>
 
-    <div class="features-visual">
+    <div class="features-visual reveal reveal-delay-2">
       <div class="testimonial-grid">
         <div class="testimonial-item">
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-text">I spent two years bringing my son to different specialists. One call with Dr. Armagno and I finally understood what was actually going on with his vision.</p>
           <div class="testimonial-attr">
@@ -1649,6 +2059,9 @@
           </div>
         </div>
         <div class="testimonial-item">
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-text">As a competitive swimmer, I never considered how much my vision was affecting my turns and tracking. The drill plan Dr. Armagno put together was a game changer.</p>
           <div class="testimonial-attr">
@@ -1660,6 +2073,9 @@
           </div>
         </div>
         <div class="testimonial-item">
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-text">My headaches were miserable after a full day of work. Thirty minutes with Dr. Armagno gave me a clear plan — and they were gone within a week.</p>
           <div class="testimonial-attr">
@@ -1676,12 +2092,12 @@
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- PRICING — now dark moss to break section rhythm -->
 <section class="pricing-section" id="pricing">
-  <div class="section-label">Transparent pricing</div>
-  <h2 class="section-title">Flat fees. No insurance games.<br><em>No surprises.</em></h2>
+  <div class="section-label reveal">Transparent pricing</div>
+  <h2 class="section-title reveal reveal-delay-1">Flat fees. No insurance games.<br><em>No surprises.</em></h2>
   <div class="pricing-grid">
-    <div class="price-card">
+    <div class="price-card reveal reveal-delay-1">
       <div class="price-type">Single consultation</div>
       <div class="price-amount">$100</div>
       <div class="price-per">per 30-minute session</div>
@@ -1694,7 +2110,7 @@
       </ul>
       <a href="#book" class="price-cta">Book now</a>
     </div>
-    <div class="price-card featured">
+    <div class="price-card featured reveal reveal-delay-2">
       <div class="featured-badge">Most popular</div>
       <div class="price-type">Family package</div>
       <div class="price-amount">$250</div>
@@ -1706,13 +2122,13 @@
       </div>
       <ul class="price-features">
         <li>Everything in single consult</li>
-        <li>Priority scheduling</li>
+        <li>Priority scheduling — booked before new clients</li>
         <li>Progress check-in between sessions</li>
         <li>Use across your whole family</li>
       </ul>
       <a href="#book" class="price-cta">Get started</a>
     </div>
-    <div class="price-card">
+    <div class="price-card reveal reveal-delay-3">
       <div class="price-type">Corporate wellness</div>
       <div class="price-amount">Custom</div>
       <div class="price-per">monthly retainer for teams</div>
@@ -1726,14 +2142,82 @@
       <a href="#book" class="price-cta">Get a quote</a>
     </div>
   </div>
-  <p class="pricing-disclaimer">
+  <p class="pricing-disclaimer reveal reveal-delay-4">
     <strong>Please note:</strong> Consultations are available to residents of <strong>New York and Pennsylvania</strong> only. These are expert guidance sessions — not substitutes for a comprehensive in-person eye exam, and do not include prescriptions.
   </p>
 </section>
 
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-label reveal">Common questions</div>
+  <h2 class="section-title reveal reveal-delay-1">Everything you need<br>to know <em>before booking</em></h2>
+
+  <div class="faq-grid">
+    <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">Can you actually diagnose my condition?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>I can review your symptoms, history, and existing records and give you a professional clinical opinion on what's likely going on — but a formal diagnosis requires an in-person comprehensive exam. What I can tell you is whether your situation is urgent, what it sounds like, and what kind of specialist or test would confirm it.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">Do you accept insurance?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>No — consultations are a flat cash fee paid at booking. This keeps things simple and means no surprise bills. HSA and FSA cards are accepted. These sessions are not billed through insurance, which also means there's no claim, no referral requirement, and no waitlist.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">I'm not in NY or PA. Can I still book?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Unfortunately, no. I'm licensed to practice in New York and Pennsylvania, and telehealth regulations require that I only see clients who are physically located in states where I hold a license. If you're outside those states, I'm not able to see you at this time.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">Is this HIPAA compliant?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Yes. All video consultations are conducted through a HIPAA-compliant platform, and your intake information is handled securely. Your health information is never shared with third parties.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">What if I need an in-person exam after?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>That's often exactly the point. I'll tell you what kind of provider to see, what specific tests to ask for, and what questions to bring. You'll walk into that appointment knowing exactly what to ask — instead of starting from scratch with a stranger.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <div class="faq-q-text">Can you write a glasses or contact lens prescription?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>No. Writing a prescription requires in-person testing — specifically a refraction, which can't be performed remotely. If you need a new prescription, I can help you find the right in-person provider and explain what to expect from that visit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="book">
-  <div class="cta-inner">
+  <div class="cta-inner reveal">
     <div class="cta-text">
       <h2 class="cta-title">Ready for an eye doctor<br>who <em>actually has time for you</em>?</h2>
       <p class="cta-sub">Most appointments available within 48 hours. No referral needed. NY &amp; PA residents welcome.</p>
@@ -1745,29 +2229,31 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER — restructured with full-width legal bar -->
 <footer>
-  <div class="footer-top">
+  <div class="footer-legal-bar">
+    <p>
+      <strong>Important:</strong> Consultations are expert guidance, second opinions, and care navigation only. They are not a substitute for a comprehensive in-person eye examination, do not include eyeglass or contact lens prescriptions, and cannot assess conditions requiring dilation, tonometry, or physical examination. If you are experiencing sudden vision changes, eye pain, or loss of vision, please seek emergency care immediately. Available to residents of New York and Pennsylvania only.
+    </p>
+  </div>
+  <div class="footer-bottom-row">
     <div>
       <a href="#" class="footer-logo-name">Dr. Rebecca Armagno</a>
-      <div class="footer-logo-title">Optometrist, OD · NY &amp; PA Licensed</div>
+      <div class="footer-logo-title">Optometrist, OD · NY &amp; PA Licensed · NPI 1104440536</div>
     </div>
     <div class="footer-links">
       <a href="#how">How it works</a>
       <a href="#specialties">Specialties</a>
       <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
       <a href="#about-doctor">About</a>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-disclaimer">
-      <strong>Important:</strong> Consultations are expert guidance, second opinions, and care navigation only. They are not a substitute for a comprehensive in-person eye examination, do not include eyeglass or contact lens prescriptions, and cannot assess conditions requiring dilation, tonometry, or physical examination. If you are experiencing sudden vision changes, eye pain, or loss of vision, please seek emergency care immediately. Available to residents of New York and Pennsylvania only.
-    </p>
     <p class="footer-copy">© 2025 Dr. Rebecca Armagno, OD</p>
   </div>
 </footer>
 
 <script>
+  /* ── MOBILE MENU ── */
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
@@ -1778,6 +2264,33 @@
       menu.classList.remove('open');
     }
   });
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  /* ── FAQ ACCORDION ── */
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(function(i) {
+      i.classList.remove('open');
+    });
+    // Open clicked if it wasn't already open
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
 </script>
 </body>
 </html>
